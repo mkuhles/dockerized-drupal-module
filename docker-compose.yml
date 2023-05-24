@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb
+    container_name: database
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - db-data:/var/lib/db
+
+  drupal:
+    build:
+      context: .docker/drupal
+    container_name: drupal10
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+     - 8080:80
+    volumes:
+      - .:/opt/drupal/web/modules/module_in_development
+      - drupal-sites:/opt/drupal/web/sites
+
+volumes:
+  drupal-sites:
+  db-data:
