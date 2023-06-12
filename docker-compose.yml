@@ -13,14 +13,17 @@ services:
   drupal:
     build:
       context: .docker/drupal
+      args:
+        -  MODULES_NAME=${MODULES_NAME}
     container_name: drupal10
     depends_on:
       - db
     restart: unless-stopped
+    env_file: .env
     ports:
      - 8080:80
     volumes:
-      - .:/opt/drupal/web/modules/module_in_development
+      - .:/opt/drupal/web/modules/${MODULES_NAME}
       - drupal-sites:/opt/drupal/web/sites
 
 volumes:

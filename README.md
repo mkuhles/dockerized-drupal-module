@@ -2,4 +2,7 @@
 
 This Project sets up an docker environment for module development.
 
-Simply `docker compose up` and run `./init.sh` from within scripts/ folder.
+Before you start change `MODULES_NAME` in `.env`.
+Afterwards run `./startover.sh` from within `scripts/` folder.
+
+While setup you'll be asked the drush setup questions, besides the module name. 
