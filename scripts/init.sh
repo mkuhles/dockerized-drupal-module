@@ -17,8 +17,9 @@ docker exec $DRUPAL_CONTAINER_NAME chown www-data:www-data /opt/drupal/web/sites
 
 docker exec -it $DRUPAL_CONTAINER_NAME  bash -c "drush generate module --answer=$MODULES_NAME --answer=$MODULES_NAME"
 
-echo 'You have to change the owner from the generated files on your host system. By now it is root.'
-echo "> sudo chown $USER:$(id -gn) $MODULES_NAME.info.yml"
-echo "> sudo chown $USER:$(id -gn) $MODULES_NAME.install"
-echo -e "> sudo chown $USER:$(id -gn) $MODULES_NAME.module\n"
-echo -e "Call 'composer init' for creating a composer.json file.\n"
+docker exec -it --user root $DRUPAL_CONTAINER_NAME  bash -c "chown $(id -u):$(id -g) $MODULES_NAME.info.yml"
+docker exec -it --user root $DRUPAL_CONTAINER_NAME  bash -c "if test -f $MODULES_NAME.install; then chown $(id -u):$(id -g) $MODULES_NAME.install; fi"
+docker exec -it --user root $DRUPAL_CONTAINER_NAME  bash -c "if test -f $MODULES_NAME.module; then chown $(id -u):$(id -g) $MODULES_NAME.module; fi"
+docker exec -it --user root $DRUPAL_CONTAINER_NAME  bash -c "if test -f README.md; then chown $(id -u):$(id -g) README.md; fi"
+
+echo -e "\nCall 'composer init' for creating a composer.json file.\n"
