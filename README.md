@@ -2,7 +2,12 @@
 
 This Project sets up an docker environment for module development.
 
-Before you start change `MODULES_NAME` in `.env`.
+Before you start
+
+- copy `example.env` to `.env`
+- change `MODULES_NAME` in `.env`
+- add your user and your group id in `.env`. Find them by run `id` in your terminal.
+
 Afterwards run `./startover.sh` from within `scripts/` folder.
 
 While setup you'll be asked the drush setup questions, besides the module name.

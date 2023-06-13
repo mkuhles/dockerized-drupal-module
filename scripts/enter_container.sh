@@ -4,4 +4,4 @@ if [ -f ../.env ]; then
   source ../.env;
 fi
 
-docker exec -it $DRUPAL_CONTAINER_NAME bash
+docker exec --user www-data -it $DRUPAL_CONTAINER_NAME bash
