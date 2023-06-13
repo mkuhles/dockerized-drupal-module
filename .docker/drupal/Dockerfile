@@ -24,3 +24,5 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/drupal/web/modules/${MODULES_NAME}
 
 EXPOSE 8080
+
+USER www-data
